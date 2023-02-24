@@ -11,7 +11,7 @@ public interface MenuService {
     MenuPojo saveMenu(MenuPojo menuPojo) throws IOException;
 
 
-    Menu fetchById(Integer id);
+
 
     void deleteById(Integer id);
 
@@ -21,7 +21,6 @@ public interface MenuService {
 
     Map<Integer, Double> comparePrice(List<Menu> menus);
 
-    MenuPojo save(MenuPojo menuPojo) throws IOException;
 
     List<Menu> fetchAll();
     Menu getSingle(Integer id);

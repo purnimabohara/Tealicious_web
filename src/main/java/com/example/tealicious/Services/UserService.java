@@ -19,7 +19,9 @@ public interface UserService {
 //    contact Page
 String submitMsg(ContactPojo contactPojo);
     List<Contact> fetchAllContact();
-
+    List<User> fetchAllUser();
+    void deleteCustomer(Integer id);
+    void deleteContact(Integer id);
 
     User findByEmail(String email);
 
@@ -29,5 +31,5 @@ String submitMsg(ContactPojo contactPojo);
 
     void sendEmail();
 
-    List<User> fetchAll();
+
 }

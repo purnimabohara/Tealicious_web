@@ -1,6 +1,7 @@
 package com.example.tealicious.Pojo;
 
 import com.example.tealicious.Entity.User;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,10 +13,18 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UserPojo {
     private Integer id;
+    @NotEmpty(message = "email should not be empty")
     private String email;
+    @NotEmpty(message = "Phone can't be empty")
     private String mobile_no;
+    @NotEmpty(message = "Full name can't be empty")
     private String fullname;
+
     private String password;
+
+
+
+
 
     public UserPojo(User user) {
         this.id = user.getId();
@@ -24,4 +33,6 @@ public class UserPojo {
         this.fullname = user.getFullname();
         this.password = user.getPassword();
     }
+
+
 }

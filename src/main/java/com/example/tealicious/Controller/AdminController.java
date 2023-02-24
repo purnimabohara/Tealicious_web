@@ -36,12 +36,12 @@ import java.util.Map;
 @RequestMapping("/admin")
 public class AdminController {
     private final UserService userService;
-    private  final MenuService menuService;
-
-
+    private final MenuService menuService;
 
 
     private final GalleryServices galleryServices;
+
+    //gallery
 
     @GetMapping("/addImage")
     public String getGallery(Model model) {
@@ -79,17 +79,12 @@ public class AdminController {
         ));
         return "Admin/viewImages";
     }
-    @GetMapping("/dashboard")
-    public String getDashboard(Model model) {
-        List<User> user = userService.fetchAll();
-        model.addAttribute("userlist", user);
-        return "Admin/dashboard";
-    }
     @GetMapping("/deleteImg/{id}")
     public String delImg(@PathVariable("id") Integer id) {
         galleryServices.deleteById(id);
         return "redirect:/admin/viewImage";
     }
+
 
     public Map<String, String> validateRequest(BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
@@ -119,14 +114,25 @@ public class AdminController {
         return base64;
     }
 
-    @GetMapping("/addMenu")
-    public String getMenu(Model model) {
-        model.addAttribute("menu", new MenuPojo());
-        return "add_menu";
+    //dashboard
+
+    @GetMapping("/dashboard")
+    public String getDashboard(Model model) {
+
+
+        return "Admin/dashboard";
     }
 
-    @PostMapping("/addmenu")
-    public String createUser(@Valid MenuPojo menuPojo,
+    //Menu
+
+    @GetMapping("/addMenu")
+    public String getaddMenu(Model model) {
+        model.addAttribute("menu", new MenuPojo());
+        return "Admin/add_menu";
+    }
+
+    @PostMapping("/saveMenu")
+    public String saveMenu(@Valid MenuPojo menuPojo,
                              BindingResult bindingResult, RedirectAttributes redirectAttributes) throws IOException {
 
         Map<String, String> requestError = validateRequest(bindingResult);
@@ -135,24 +141,30 @@ public class AdminController {
             return "redirect:/admin/addMenu";
         }
 
-       menuService.save(menuPojo);
+        menuService.saveMenu(menuPojo);
         redirectAttributes.addFlashAttribute("successMsg", "Image saved successfully");
 
-        return "redirect:/admin/viewMenu";
+        return "redirect:/admin/menuDetails";
     }
 
-    @GetMapping("/viewMenu")
-    public String addMenu( Model model) {
+    @GetMapping("/deleteMenu/{id}")
+    public String delMenu(@PathVariable("id") Integer id) {
+        menuService.deleteById(id);
+        return "redirect:/admin/menuDetails";
+    }
+
+    @GetMapping("/menuDetails")
+    public String viewMenu(Model model) {
         List<Menu> menus = menuService.fetchAll();
         model.addAttribute("menulist", menus.stream().map(menu ->
-               Menu.builder()
+                Menu.builder()
                         .id(menu.getId())
                         .name(menu.getName())
-                       .item_description(menu.getItem_description())
-                       .item_quantity(menu.getItem_quantity())
-                       .price(menu.getPrice())
-                       .date(menu.getDate())
-                        .imageBase64(getImagebase64(menu.getImage()))
+                        .item_description(menu.getItem_description())
+                        .item_quantity(menu.getItem_quantity())
+                        .price(menu.getPrice())
+                        .date(menu.getDate())
+                        .menu_imageBase64(getImagebase64(menu.getImage()))
                         .build()
 
         ));
@@ -160,11 +172,9 @@ public class AdminController {
     }
 
 
-
-
-
     public String getImagebase64(String fileName) {
         String filePath = System.getProperty("user.dir") + "/Menu/";
+
         File file = new File(filePath + fileName);
         byte[] bytes = new byte[0];
         try {
@@ -175,9 +185,26 @@ public class AdminController {
         }
         String base64 = Base64.getEncoder().encodeToString(bytes);
         return base64;
-    }
+
+//        Path imagePath = Paths.get(filePath + fileName);
+//
+//        try {
+//            Path symbolicLink = Paths.get("C:/menu/" + fileName); // create a symbolic link to a shorter path
+//            if (!symbolicLink.toFile().exists()) {
+//                Files.createSymbolicLink(symbolicLink, imagePath);
+//            }
+//            byte[] bytes = Files.readAllBytes(symbolicLink);
+//            String base64 = Base64.getEncoder().encodeToString(bytes);
+//            return base64;
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            return null;
+        }
 
 
+
+
+    //contact
 
     @GetMapping("/contactfetch")
     public String getContactAdmin(Model model) {
@@ -185,9 +212,38 @@ public class AdminController {
         model.addAttribute("contactlist", contact);
 
 
-
         return "Admin/viewContact";
+    }
+    @GetMapping("/deleteCon/{id}")
+    public String deleteCont(@PathVariable("id") Integer id) {
+        userService.deleteContact(id);
+        return "redirect:/admin/contactfetch";
     }
 
 
+    //customer
+
+
+    @GetMapping("/userDetails")
+    public String getUserDetails(org.springframework.ui.Model model)
+    {        List<User> users = userService.fetchAllUser();
+        model.addAttribute("userList", users.stream().map(user ->
+                User.builder()
+                        .id(user.getId())
+                        .fullname(user.getFullname())
+                        .email(user.getEmail())
+                        .mobileNo(user.getMobileNo())
+                        .build()        ));
+        return "Admin/viewCustomer";
+    }
+
+    @GetMapping("/deleteCus/{id}")
+    public String deleteCust(@PathVariable("id") Integer id) {
+        userService.deleteCustomer(id);
+        return "redirect:/admin/userDetails";
+    }
+
+
+
 }
+

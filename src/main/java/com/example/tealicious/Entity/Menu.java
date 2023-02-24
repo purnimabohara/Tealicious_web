@@ -35,6 +35,6 @@ public class Menu {
     private String image;
 
     @Transient
-    private String imageBase64;
+    private String menu_imageBase64;
 }
 

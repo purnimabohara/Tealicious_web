@@ -8,7 +8,6 @@ package com.example.tealicious.Controller;
 import com.example.tealicious.Entity.Gallery;
 import com.example.tealicious.Entity.Menu;
 import com.example.tealicious.Pojo.ContactPojo;
-import com.example.tealicious.Pojo.MenuPojo;
 import com.example.tealicious.Pojo.UserPojo;
 import com.example.tealicious.Services.GalleryServices;
 import com.example.tealicious.Services.MenuService;
@@ -50,7 +49,7 @@ public class HomeController {
             Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
             for (GrantedAuthority grantedAuthority : authorities) {
                 if (grantedAuthority.getAuthority().equals("Admin")) {
-                    return "redirect:/admin/viewImage";
+                    return "redirect:/admin/dashboard";
                 }
             }
         }
@@ -58,6 +57,8 @@ public class HomeController {
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
             return "redirect:/user/login";
         }
+
+        //menu
 
         List<Menu> menus = menuService.fetchAll();
         model.addAttribute("menu", menus);
@@ -85,11 +86,8 @@ public class HomeController {
         return ("home");
     }
 
-    @GetMapping("/add")
-    public String createUser(Model model){
-        model.addAttribute("menu",new MenuPojo());
-        return "add_menu";
-    }
+
+    //aboutpage
 
 
     @GetMapping("/about")
@@ -103,6 +101,10 @@ public class HomeController {
 
         return "about_us";
     }
+
+
+    //cart page
+
 
     @GetMapping("/addToCart")
     public String getAddToCart (Integer id,Model model, Principal principal) {
@@ -129,6 +131,8 @@ public class HomeController {
     }
 
 
+    //contactpage
+
     @GetMapping("/contact")
     public String getPage( Model model, Principal principal){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -142,7 +146,7 @@ public class HomeController {
 
 
 
-
+//gallery page
 
     @GetMapping("/gallery")
     public String getGallery( Model model,Principal principal) {
@@ -162,6 +166,11 @@ public class HomeController {
 //        model.addAttribute("info",userService.findByEmail(principal.getName()));
         return "gallery";
     }
+
+
+
+
+    //profile page
 
     @GetMapping("/profile")
     public String getUserProfile (Integer id,Model model, Principal principal) {
@@ -198,6 +207,21 @@ public class HomeController {
         }
         String base64 = Base64.getEncoder().encodeToString(bytes);
         return base64;
+    }
+
+    //menu
+
+    @GetMapping("/menu")
+    public String getMenu(Model model, Principal principal) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            return "loginPage";
+        }
+//        model.addAttribute("info",userService.findByEmail(principal.getName()));
+        List<Menu> menus = menuService.fetchAll();
+        model.addAttribute("menu", menus);
+
+        return "menu";
     }
 
 }

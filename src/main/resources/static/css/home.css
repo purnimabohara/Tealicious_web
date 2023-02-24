@@ -184,6 +184,7 @@ html ::-webkit-scrollbar{
 }
 #menu .card{
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    margin-bottom: 9%;
 }
 #menu .card:hover{
     transform: scale(0.9);
@@ -193,17 +194,21 @@ html ::-webkit-scrollbar{
     height:300px;
 
 }
+h3 a{
+    text-decoration: none;
+}
 
-#menu h3{
+#menu h3 a ,h3{
     text-align: center;
     color:#EA89B4;
     margin-top: 10px;
     font-size: 25px;
 }
-#menu p{
+#menu p a {
     font-size: 16px;
     color:#EA89B4;
     padding-top: 10px;
+    text-decoration: none;
 }
 #menu p button{
     float: right;
@@ -240,6 +245,7 @@ html ::-webkit-scrollbar{
     background: none;
     border: none;
     color:#EA89B4;
+    margin-left: 57%;
 
 }
 #btnCart:hover{

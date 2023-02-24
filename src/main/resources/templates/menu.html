@@ -52,146 +52,32 @@
 
         <div class="row">
 
-
-            <div class="col-md-4 py-3 py-md-0">
+            <div class="col-md-4 py-3 py-md-0" th:each="menu:${menu}">
                 <div class="card">
                     <div class="card-image">
-                        <img th:src="@{/images/menu1.png.png}" style="height: 100%; width: 100%;" alt="">
+                        <img th:src="'data:image/png;base64,'+${menu.menu_imageBase64}" style="height: 100%; width: 100%;" alt="">
                     </div>
 
                     <div class="card-body">
 
-                        <h3>. Strawberry Milk Tea</h3>
+                        <h3><a th:href="@{~/menu/}+${menu.id}" th:text="${menu.name}"></a></h3>
                         <div class="star text-center">
-                            <p> Lorem ipsum dolor sit amet consectetur adipisicing.  Consectetur suscipit modi ab, incidunt totam adipisci.
-
+                            <p><a  th:text="${menu.item_description}"></a>
                             </p>
-                        </div>
-                        <p>$200 <strike>$290</strike> <button class="fa-solid fa-cart-shopping" id="btnCart" ><a th:href="@{~/rooms/luxeroom}"></a></button></p>
 
+
+                        </div>
+                        <p> <a th:text="${menu.price}"></pth:text></a> <a class="fa-solid fa-cart-shopping"  id="btnCart"  th:href="@{~/home/addToCart}"></a></p>
                     </div>
 
                 </div>
             </div>
-            <div class="col-md-4 py-3 py-md-0">
-                <div class="card">
-                    <div class="card-image">
-                        <img th:src="@{/images/menu2.png.png}" style="height: 100%; width: 100%;" alt="">
-                    </div>
 
-                    <div class="card-body">
-
-                        <h3>Taro Milk Tea</h3>
-                        <div class="star text-center">
-                            <p> Lorem ipsum dolor sit amet consectetur adipisicing.  Consectetur suscipit modi ab, incidunt totam adipisci.
-
-                            </p>
-                        </div>
-                        <p>$190 <strike>$220</strike> <button class="fa-solid fa-cart-shopping" id="btnCart" ><a th:href="@{~/rooms/luxeroom}"></a></button></p>
-
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-md-4 py-3 py-md-0">
-                <div class="card">
-                    <div class="card-image">
-                        <img th:src="@{/images/menu3.png.png}" style="height: 100%; width: 100%;" alt="">
-                    </div>
-
-                    <div class="card-body">
-
-                        <h3>Honeydew Milk Tea</h3>
-                        <div class="star text-center">
-                            <p> Lorem ipsum dolor sit amet consectetur adipisicing.  Consectetur suscipit modi ab, incidunt totam adipisci.
-
-                            </p>
-                        </div>
-
-                        <p>$180 <strike>$240</strike> <button class="fa-solid fa-cart-shopping" id="btnCart" ><a  th:href="@{~/rooms/luxeroom}"></a></button></button></p>
-
-                    </div>
-
-                </div>
-            </div>
 
         </div>
-
-
-
-
-
-        <div class="row" style="margin-top: 30px;">
-
-            <div class="col-md-4 py-3 py-md-0">
-                <div class="card">
-                    <div class="card-image">
-                        <img th:src="@{/images/menu4.png.png}" style="height: 98%; width: 100%;" alt="">
-                    </div>
-
-                    <div class="card-body">
-
-
-                        <h3>Oreo Bubble Shake Tea</h3>
-                        <div class="star text-center">
-                            <p> Lorem ipsum dolor sit amet consectetur adipisicing.  Consectetur suscipit modi ab, incidunt totam adipisci.
-
-                            </p>
-                        </div>
-                        <p>$150 <strike>$260</strike> <button class="fa-solid fa-cart-shopping" id="btnCart" ><a th:href="@{~/rooms/luxeroom}"></a></button></p>
-
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-md-4 py-3 py-md-0">
-                <div class="card">
-                    <div class="card-image">
-                        <img th:src="@{/images/menu5.png.png}"  style="height: 100%; width: 100%;" alt="">
-                    </div>
-
-                    <div class="card-body">
-
-                        <h3>Butterfly pea Bubble Tea</h3>
-                        <div class="star text-center">
-                            <p> Lorem ipsum dolor sit amet consectetur adipisicing.  Consectetur suscipit modi ab, incidunt totam adipisci.
-
-                            </p>
-                        </div>
-                        <p>$130<strike>$180</strike> <button class="fa-solid fa-cart-shopping"  id="btnCart" ><a th:href="@{~/rooms/luxeroom}"></a></button></p>
-
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="col-md-4 py-3 py-md-0">
-                <div class="card">
-                    <div class="card-image">
-                        <img th:src="@{/images/menu6.png.png}" style="height: 100%; width: 100%;" alt="">
-                    </div>
-
-                    <div class="card-body">
-
-                        <h3>Jasmine Milk Tea</h3>
-                        <div class="star text-center">
-                            <p> Lorem ipsum dolor sit amet consectetur adipisicing.  Consectetur suscipit modi ab, incidunt totam adipisci.
-
-                            </p>
-                        </div>
-                        <p>$130<strike>$180</strike> <button class="fa-solid fa-cart-shopping"  id="btnCart" ><a th:href="@{~/rooms/luxeroom}"></a></button></p>
-
-                    </div>
-
-                </div>
-            </div>
-
-            <button id="menu-btn"><a class="home-link" th:href="@{~/home/menu}">See More.</a></button>
-        </div>
-
-
-
     </div>
+
+
 </section>
 </body>
 </html>

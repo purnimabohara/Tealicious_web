@@ -24,7 +24,7 @@ import java.util.stream.Stream;
 public class MenuServiceImpl implements MenuService {
     private final MenuRepo menuRepo;
 //    private final CartRepo cartRepo;
-    public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/Menu";
+    public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/Menus";
 
     @Override
     public MenuPojo saveMenu(MenuPojo menuPojo) throws IOException {
@@ -53,10 +53,7 @@ public class MenuServiceImpl implements MenuService {
         return new MenuPojo(menu);
     }
 
-    @Override
-    public MenuPojo save(MenuPojo menuPojo) throws IOException {
-        return null;
-    }
+
 
     @Override
     public List<Menu> fetchAll() {
@@ -65,10 +62,7 @@ public class MenuServiceImpl implements MenuService {
 
 
 
-    @Override
-    public Menu fetchById(Integer id) {
-        return menuRepo.findById(id).orElseThrow(()->new RuntimeException("not found"));
-    }
+
 
 
     @Override
@@ -133,7 +127,7 @@ public class MenuServiceImpl implements MenuService {
                         .price(menu.getPrice())
                         .date(menu.getDate())
 
-                        .imageBase64(getImageBase64(menu.getImage()))
+                        .menu_imageBase64(getImageBase64(menu.getImage()))
                         .build()
         );
         list = allMenusWithImage.toList();
@@ -156,7 +150,7 @@ public class MenuServiceImpl implements MenuService {
 
     public static String getImageBase64(String fileName) {
         if (fileName!=null) {
-            String filePath = System.getProperty("user.dir") + "/Menu";
+            String filePath = System.getProperty("user.dir") + "/Menu/";
             File file = new File(filePath + fileName);
             byte[] bytes;
             try {

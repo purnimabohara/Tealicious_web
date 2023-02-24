@@ -1,6 +1,7 @@
 package com.example.tealicious.Pojo;
 
 import com.example.tealicious.Entity.Contact;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,10 +15,13 @@ import lombok.Setter;
 public class ContactPojo {
 
     private Integer id;
-
+    @NotEmpty(message = "fullname should not be empty")
     private  String fullname;
+    @NotEmpty(message = "email should not be empty")
     private String email;
+
     private  String subject;
+    @NotEmpty(message = "message should be at least a sentence")
     private  String message;
 
     public ContactPojo(Contact contact) {

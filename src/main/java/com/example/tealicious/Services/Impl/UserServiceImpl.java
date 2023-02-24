@@ -90,6 +90,18 @@ public class UserServiceImpl implements UserService {
         return this.contactRepo.findAll();
     }
 
+    @Override
+    public List<User> fetchAllUser() {
+        return this.userRepo.findAll();
+    }
+    @Override
+    public void deleteCustomer(Integer id) {
+        userRepo.deleteById(id);
+    }
+    @Override
+    public void deleteContact(Integer id) {
+        contactRepo.deleteById(id);
+    }
 
 
     @Override
@@ -172,8 +184,5 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Override
-    public List<User> fetchAll() {
-        return null;
-    }
+
 }

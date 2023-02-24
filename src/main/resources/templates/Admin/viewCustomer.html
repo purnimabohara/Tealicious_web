@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Contact</title>
+    <title>Customer</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -13,6 +13,7 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script th:src="@{~/javascript/notification.js}" defer></script>
     <link rel="stylesheet" th:href="@{/css/viewCutomerlist.css}">
+
 
 
     <style>
@@ -34,7 +35,7 @@
 
 <div class="Main-wrapper">
     <div class="wrapper-top">
-        <h2>Contact</h2>
+        <h2>Customer</h2>
     </div>
 
     <div style="overflow-x:auto;"></div>
@@ -44,26 +45,26 @@
             <th>Customer_Id</th>
             <th>Full Name</th>
             <th>Email</th>
-            <th>Date</th>
-            <th>Address</th>
+            <th>Mobile_no</th>
             <th>Action</th>
             <!--            <th>Action</th>-->
         </tr>
         </thead>
         <tbody>
-        <tr th:each="cab:${contactlist}">
+        <tr th:each="cab:${userList}">
             <td th:text="${cab.id}"></td>
             <td th:text="${cab.fullname}"></td>
             <td th:text="${cab.email}"></td>
-            <td th:text="${cab.message}"></td>
-            <td th:text="${cab.subject}"></td>
+            <td th:text="${cab.mobileNo}"></td>
 
-            <td> <a class="edit" th:href="@{~/admin/editMenu/}+${menu.id}" >Edit</a></td>
-            <td> <a class="edit" th:href="@{~/admin/deleteMenu/}+${menu.id}" >Delete</a></td>
+
+            <td> <a class=" contact_button" th:href="@{~/admin/deleteCus/}+${cab.id}" >Delete</a></td>
 
 
         </tr>
+
         </tbody>
+
 
     </table>
 
